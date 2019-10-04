@@ -13,8 +13,19 @@ public class NW {
 		 * READ IN DATA
 		 */
 		
-		FileReader seq1 = new FileReader("C:\\Users\\Owner\\Documents\\workspace\\Needleman_Wunsch\\src\\FastaSampleFiles\\HIV1a.fasta");
-		FileReader seq2 = new FileReader("C:\\Users\\Owner\\Documents\\workspace\\Needleman_Wunsch\\src\\FastaSampleFiles\\HIV1b.fasta");
+		String fasta1 = args[0];
+		String fasta2 = args[1];
+		
+		int match = Integer.parseInt(args[2]);
+		int mismatch = Integer.parseInt(args[3]);
+		int gap = Integer.parseInt(args[4]);
+		
+		//FileReader seq1 = new FileReader("C:\\Users\\Owner\\Documents\\workspace\\Needleman_Wunsch\\src\\FastaSampleFiles\\HIV1a.fasta");
+		//FileReader seq2 = new FileReader("C:\\Users\\Owner\\Documents\\workspace\\Needleman_Wunsch\\src\\FastaSampleFiles\\HIV1b.fasta");
+		
+		FileReader seq1 = new FileReader(fasta1);
+		FileReader seq2 = new FileReader(fasta2);
+		
         BufferedReader seq1_buff = new BufferedReader(seq1);
         BufferedReader seq2_buff = new BufferedReader(seq2);
    
@@ -38,7 +49,7 @@ public class NW {
         long read_data_time = System.nanoTime();
         System.out.println("Time to read in data: "+(read_data_time - startTime)/1000000000.0 + " seconds");
         
-		Aligner align = new Aligner(seq1_final,seq2_final);
+		Aligner align = new Aligner(seq1_final,seq2_final,match,mismatch,gap);
 		long endTime = System.nanoTime();
 		System.out.println("Time to do entire algorithm: "+(endTime - startTime)/1000000000.0 + " seconds");
 	}
